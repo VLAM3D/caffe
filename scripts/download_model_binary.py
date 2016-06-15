@@ -3,7 +3,7 @@ import os
 import sys
 import time
 import yaml
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import hashlib
 import argparse
 
@@ -42,7 +42,7 @@ def valid_dirname(dirname):
     try:
         return parse_readme_frontmatter(dirname)
     except Exception as e:
-        print('ERROR: {}'.format(e))
+        print(('ERROR: {}'.format(e)))
         raise argparse.ArgumentTypeError(
             'Must be valid Caffe model directory with a correct readme.md')
 
@@ -69,7 +69,7 @@ if __name__ == '__main__':
         sys.exit(0)
 
     # Download and verify model.
-    urllib.urlretrieve(
+    urllib.request.urlretrieve(
         frontmatter['caffemodel_url'], model_filename, reporthook)
     if not model_checks_out():
         print('ERROR: model did not download correctly! Run this again.')
