@@ -68,7 +68,7 @@ if(NOT HAVE_CUDA)
 endif()
 
 # ---[ OpenCV
-if(USE_OPENCV)
+if(USE_OPENCV)  
   find_package(OpenCV QUIET COMPONENTS core highgui imgproc imgcodecs)
   if(NOT OpenCV_FOUND) # if not OpenCV 3.x, then imgcodecs are not found
     find_package(OpenCV REQUIRED COMPONENTS core highgui imgproc)
@@ -108,8 +108,10 @@ endif()
 if(BUILD_python)
   if(NOT "${python_version}" VERSION_LESS "3.0.0")
     # use python3
-    find_package(PythonInterp 3.0)
-    find_package(PythonLibs 3.0)
+    find_package(PythonInterp REQUIRED)
+    message (STATUS "Using this Python interpreter: " ${PYTHON_EXECUTABLE})
+    find_package(PythonLibs 3.0 REQUIRED)
+    message (STATUS "Using this Python Lib: " ${PYTHON_LIBRARIES})
     find_package(NumPy 1.7.1)
     # Find the matching boost python implementation
     set(version ${PYTHONLIBS_VERSION_STRING})
