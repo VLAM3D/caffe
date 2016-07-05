@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\..\NugetPackages\protoc_x64.2.6.1\build\native\protoc_x64.props" Condition="Exists('..\..\..\NugetPackages\protoc_x64.2.6.1\build\native\protoc_x64.props')" />
   <Import Project="..\..\..\NugetPackages\OpenCV.2.4.10\build\native\OpenCV.props" Condition="Exists('..\..\..\NugetPackages\OpenCV.2.4.10\build\native\OpenCV.props')" />
   <Import Project="..\..\..\NugetPackages\glog.0.3.3.0\build\native\glog.props" Condition="Exists('..\..\..\NugetPackages\glog.0.3.3.0\build\native\glog.props')" />
@@ -20,7 +20,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -61,6 +61,10 @@
     <ClCompile Include="..\..\python\caffe\_caffe.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\caffe\caffe.vcxproj">
+      <Project>{ce6bbc46-9efc-4029-9065-85a023866afb}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
     <ProjectReference Include="..\libcaffe\libcaffe.vcxproj">
       <Project>{a9acef83-7b63-4574-a554-89ce869ea141}</Project>
       <Private>false</Private>
@@ -91,12 +95,17 @@
     <Import Project="..\..\..\NugetPackages\LevelDB-vc120.1.2.0.0\build\native\LevelDB-vc120.targets" Condition="Exists('..\..\..\NugetPackages\LevelDB-vc120.1.2.0.0\build\native\LevelDB-vc120.targets')" />
     <Import Project="..\..\..\NugetPackages\hdf5-v120-complete.1.8.15.2\build\native\hdf5-v120.targets" Condition="Exists('..\..\..\NugetPackages\hdf5-v120-complete.1.8.15.2\build\native\hdf5-v120.targets')" />
     <Import Project="..\..\..\NugetPackages\lmdb-v120-clean.0.9.14.0\build\native\lmdb-v120-clean.targets" Condition="Exists('..\..\..\NugetPackages\lmdb-v120-clean.0.9.14.0\build\native\lmdb-v120-clean.targets')" />
+    <Import Project="..\packages\boost_chrono-vc140.1.59.0.0\build\native\boost_chrono-vc140.targets" Condition="Exists('..\packages\boost_chrono-vc140.1.59.0.0\build\native\boost_chrono-vc140.targets')" />
+    <Import Project="..\packages\boost_date_time-vc140.1.59.0.0\build\native\boost_date_time-vc140.targets" Condition="Exists('..\packages\boost_date_time-vc140.1.59.0.0\build\native\boost_date_time-vc140.targets')" />
+    <Import Project="..\packages\boost_thread-vc140.1.59.0.0\build\native\boost_thread-vc140.targets" Condition="Exists('..\packages\boost_thread-vc140.1.59.0.0\build\native\boost_thread-vc140.targets')" />
+    <Import Project="..\packages\boost_python.1.59.0.0\build\native\boost_python.targets" Condition="Exists('..\packages\boost_python.1.59.0.0\build\native\boost_python.targets')" />
+    <Import Project="..\packages\boost_filesystem-vc140.1.59.0.0\build\native\boost_filesystem-vc140.targets" Condition="Exists('..\packages\boost_filesystem-vc140.1.59.0.0\build\native\boost_filesystem-vc140.targets')" />
+    <Import Project="..\packages\boost_system-vc140.1.59.0.0\build\native\boost_system-vc140.targets" Condition="Exists('..\packages\boost_system-vc140.1.59.0.0\build\native\boost_system-vc140.targets')" />
   </ImportGroup>
   <!-- Build this project only if Python support is enabled in CommonSettings.props -->
   <PropertyGroup>
     <OriginalBuildTargets>$(BuildDependsOn)</OriginalBuildTargets>
     <BuildDependsOn>OriginalBuild;SkipBuild</BuildDependsOn>
-    <NuGetPackageImportStamp>ce4167c6</NuGetPackageImportStamp>
   </PropertyGroup>
   <Target Name="OriginalBuild" Condition="'$(PythonSupport)'=='true'" DependsOnTargets="$(OriginalBuildTargets)" />
   <Target Name="SkipBuild" Condition="'$(PythonSupport)'!='true'">
@@ -125,5 +134,11 @@
     <Error Condition="!Exists('..\..\..\NugetPackages\protoc_x64.2.6.1\build\native\protoc_x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\NugetPackages\protoc_x64.2.6.1\build\native\protoc_x64.props'))" />
     <Error Condition="!Exists('..\..\..\NugetPackages\hdf5-v120-complete.1.8.15.2\build\native\hdf5-v120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\NugetPackages\hdf5-v120-complete.1.8.15.2\build\native\hdf5-v120.targets'))" />
     <Error Condition="!Exists('..\..\..\NugetPackages\lmdb-v120-clean.0.9.14.0\build\native\lmdb-v120-clean.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\NugetPackages\lmdb-v120-clean.0.9.14.0\build\native\lmdb-v120-clean.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_chrono-vc140.1.59.0.0\build\native\boost_chrono-vc140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_chrono-vc140.1.59.0.0\build\native\boost_chrono-vc140.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_date_time-vc140.1.59.0.0\build\native\boost_date_time-vc140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_date_time-vc140.1.59.0.0\build\native\boost_date_time-vc140.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_thread-vc140.1.59.0.0\build\native\boost_thread-vc140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_thread-vc140.1.59.0.0\build\native\boost_thread-vc140.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_python.1.59.0.0\build\native\boost_python.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_python.1.59.0.0\build\native\boost_python.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_filesystem-vc140.1.59.0.0\build\native\boost_filesystem-vc140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_filesystem-vc140.1.59.0.0\build\native\boost_filesystem-vc140.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_system-vc140.1.59.0.0\build\native\boost_system-vc140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_system-vc140.1.59.0.0\build\native\boost_system-vc140.targets'))" />
   </Target>
 </Project>

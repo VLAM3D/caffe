@@ -101,3 +101,9 @@ MANIFEST-*
 *.opensdf
 *.pdb
 *.props
+
+# VS 2015 files and folders
+windows/Backup/
+windows/Caffe.VC.db
+windows/UpgradeLog.htm
+windows/packages/
